@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="pay.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+    <h2>PayRoll Data</h2>
+    <div id="result"></div>
+
+
+    <script>
+    var data = JSON.parse(localStorage.getItem("payroll")||"{}");
+
+    var gross = data.rate * data.days;
+    var sss = gross * 0.05;
+    var pagibig = gross * 0.03;
+    var philhealth = gross * 0.02;
+    var tax = gross * 0.05;
+    var totalDed = sss + pagibig + philhealth + tax;
+    var net = gross - totalDed;
+
+    function peso(n){ return n.toFixed(2); }
+
+    document.getElementById("result").innerHTML =
+        "<form class>"+   
+        "<label>ID:</label> <span>"+data.idNumber+"</span>"+
+        "<label>Name:</label> <span>"+data.lastName+", "+data.firstName+" "+(data.middleName)+"</span>"+
+        "<label>Position:</label> <span>"+data.position+"</span>"+
+        "<label>Rate:</label> <span>"+peso(data.rate)+"</span>"+
+        "<label>Days:</label> <span>"+data.days+"</span>"+
+        "<label>Gross PAY:</label> <span>"+peso(gross)+"</span>"+
+        "<h2 class='head'>Deductions</h2><span></span>"+
+        "<label>SSS (5%):</label> <span>"+peso(sss)+"</span>"+
+        "<label>Pag-ibig (3%):</label> <span>"+peso(pagibig)+"</span>"+
+        "<label>PhilHealth (2%):</label> <span>"+peso(philhealth)+"</span>"+
+        "<label>Tax (5%):</label> <span>"+peso(tax)+"</span>"+
+        "<label>TOTAL DEDUCTION:</label> <span>"+peso(totalDed)+"</span>"+
+        "<h2 class='line'></h2>"+
+        "<label>NET PAY:</label> <span>"+peso(net)+"</span>"+
+        "</form>";
+    </script>
+    </div>
+</body>
+</html>

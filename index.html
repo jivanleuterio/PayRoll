@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="pay.css">
+    <title>PayRoll</title>
+</head>
+
+<body>
+    <div class="container">
+    <h2>GRC PAYROLL</h2>
+    <form onsubmit="goDisplay; return false;">
+        ID: <input type="text" id="idNumber" required>
+        Last Name: <input type="text" id="lastName" required>
+        First Name: <input type="text" id="firstName" required>
+        Middle Name: <input type="text" id="middleName">
+        Position: <input type="text" id="position">
+        Rate: <input type="number" id="rate" required>
+        Days: <input type="number" id="days" required>
+        <input type="submit" value="Submit" onclick="goDisplay()">
+    </form>
+    
+
+    <script>
+        function goDisplay() {
+        var data = {
+            idNumber : document.getElementById('idNumber').value,
+            lastName : document.getElementById('lastName').value,
+            firstName: document.getElementById('firstName').value,
+            middleName: document.getElementById('middleName').value.trim() || "N/A",
+            position : document.getElementById('position').value,
+            rate     : parseFloat(document.getElementById('rate').value) || 0,
+            days     : parseInt(document.getElementById('days').value) || 0
+        };
+
+        localStorage.setItem("payroll", JSON.stringify(data));
+        window.location.href = "data.html";
+    }
+    </script>
+    </div>
+</body>
+</html>
